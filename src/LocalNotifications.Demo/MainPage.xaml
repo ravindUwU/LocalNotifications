@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="RavinduL.LocalNotifications.Demo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RavinduL.LocalNotifications.Demo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Page.Resources>
+		<Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Margin" Value="0, 5"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		</Style>
+	</Page.Resources>
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<StackPanel VerticalAlignment="Center"
+					HorizontalAlignment="Center">
+
+			<Button Content="Show Default Notification"
+					Style="{StaticResource ButtonStyle}"
+					Click="DefaultButton_Click"/>
+
+			<Button Content="Show Success Notification"
+					Style="{StaticResource ButtonStyle}"
+					Click="SucessButton_Click"/>
+
+			<Button Content="Show Error Notification"
+					Style="{StaticResource ButtonStyle}"
+					Click="ErrorButton_Click"/>
+
+			<Button Content="Hide"
+					Style="{StaticResource ButtonStyle}"
+					Click="HideButton_Click"/>
+		</StackPanel>
+
+		<Grid x:Name="NotificationPanel"/>
+	</Grid>
+</Page>

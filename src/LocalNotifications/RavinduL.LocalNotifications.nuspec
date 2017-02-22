@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>RavinduL.LocalNotifications</id>
+		<version>1.0.1</version>
+		<title>RavinduL.LocalNotifications</title>
+		<authors>Ravindu Liyanapathirana</authors>
+		<owners>Ravindu Liyanapathirana</owners>
+		<licenseUrl>https://github.com/RavinduL/LocalNotifications/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/RavinduL/LocalNotifications</projectUrl>
+		<requireLicenseAcceptance>true</requireLicenseAcceptance>
+		<description>Simple local (in-app Notifications) for UWP projects.</description>
+		<summary>Simple local (in-app Notifications) for UWP projects.</summary>
+		<releaseNotes>First release.</releaseNotes>
+		<copyright>Copyright 2016</copyright>
+		<tags>uwp local notification in-app</tags>
+	</metadata>
+	<files>
+		<file src="bin\Release\RavinduL.LocalNotifications**" target="lib\uap10.0"/>
+	</files>
+</package>
