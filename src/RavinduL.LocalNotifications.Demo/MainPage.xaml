@@ -1,0 +1,151 @@
+﻿<Page
+	x:Class="RavinduL.LocalNotifications.Demo.MainPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="using:RavinduL.LocalNotifications.Demo"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d">
+
+	<Page.Resources>
+		<Style x:Key="GridStyle" TargetType="Grid">
+			<Setter Property="Margin" Value="0,5" />
+		</Style>
+	</Page.Resources>
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<StackPanel
+			Width="500"
+			Padding="20"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			BorderBrush="LightGray"
+			BorderThickness="1">
+
+			<Grid Style="{StaticResource GridStyle}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock VerticalAlignment="Center" Text="Text: " />
+				<TextBox
+					x:Name="NotificationTextBox"
+					Grid.Column="1"
+					Text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, iusto." />
+			</Grid>
+
+			<Grid Style="{StaticResource GridStyle}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock VerticalAlignment="Center" Text="Background Color: " />
+
+				<ComboBox
+					x:Name="NotificationBackgroundColorBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch"
+					SelectionChanged="NotificationBackgroundColorBox_SelectionChanged" />
+
+				<Grid
+					x:Name="NotificationBackgroundColorPreview"
+					Grid.Column="2"
+					Width="20"
+					Height="20"
+					Margin="10,0,0,0"
+					VerticalAlignment="Center"
+					BorderBrush="LightGray"
+					BorderThickness="1" />
+			</Grid>
+
+			<Grid Style="{StaticResource GridStyle}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock VerticalAlignment="Center" Text="Foreground Color: " />
+
+				<ComboBox
+					x:Name="NotificationForegroundColorBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch"
+					SelectionChanged="NotificationForegroundColorBox_SelectionChanged" />
+
+				<Grid
+					x:Name="NotificationForegroundColorPreview"
+					Grid.Column="2"
+					Width="20"
+					Height="20"
+					Margin="10,0,0,0"
+					VerticalAlignment="Center"
+					BorderBrush="LightGray"
+					BorderThickness="1" />
+			</Grid>
+
+			<Grid Style="{StaticResource GridStyle}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock VerticalAlignment="Center" Text="Duration (in seconds): " />
+				<TextBox
+					x:Name="NotificationDurationBox"
+					Grid.Column="1"
+					Text="2"
+					TextChanged="NotificationDurationBox_TextChanged" />
+			</Grid>
+
+			<Grid Style="{StaticResource GridStyle}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock VerticalAlignment="Center" Text="Collision Behaviour: " />
+				<ComboBox
+					x:Name="NotificationCollisionBehaviourBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch" />
+			</Grid>
+
+			<Grid Margin="0,10,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<Button
+					x:Name="ShowButton"
+					Margin="0,0,5,0"
+					HorizontalAlignment="Stretch"
+					Click="ShowButton_Click"
+					Content="Show" />
+
+				<Button
+					x:Name="HideCurrentButton"
+					Grid.Column="1"
+					Margin="5,0"
+					HorizontalAlignment="Stretch"
+					Click="HideCurrentButton_Click"
+					Content="Hide Current" />
+
+				<Button
+					x:Name="HideAllButton"
+					Grid.Column="2"
+					Margin="5,0,0,0"
+					HorizontalAlignment="Stretch"
+					Click="HideAllButton_Click"
+					Content="Hide All" />
+			</Grid>
+		</StackPanel>
+
+		<Grid x:Name="NotificationGrid" />
+	</Grid>
+</Page>

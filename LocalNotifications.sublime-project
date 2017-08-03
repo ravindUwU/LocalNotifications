@@ -1,0 +1,30 @@
+{
+	"settings": {
+		"word_wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": [
+				"src",
+				"docs/html"
+			],
+			"file_exclude_patterns": [
+				"*.sublime-*",
+				".gitignore",
+				"docs/prepros.cfg",
+				"docs/styles.css",
+			]
+		}
+	],
+	"build_systems": [
+		{
+			"name": "Doxygen",
+			"working_dir": "${project_path}",
+			"cmd": [
+				"doxygen"
+			]
+		}
+	]
+}

@@ -1,0 +1,230 @@
+/**
+
+\page CreatingYourOwnNotification Creating Your Own Notification
+
+\tableofcontents
+
+LocalNotifications enables you to create your own notification that is interoperable with, and managed by the library. Knowledge of the following topics is assumed.
+
+<ul>
+	<li><a href="https://docs.microsoft.com/en-us/windows/uwp/xaml-platform/xaml-overview" target="_blank">XAML layout and elements</a></li>
+	<li>XAML templated (custom) controls</li>
+	<li><a href="https://docs.microsoft.com/en-us/windows/uwp/xaml-platform/dependency-properties-overview" target="_blank">Dependency properties</a></li>
+	<li>[How LocalNotificationsWorks](@ref GettingStarted_HowItWorks)</li>
+</ul>
+
+<br>
+\section CreatingYourOwnNotification_Development Development
+
+<b>Step 1: Create a templated control.</b>
+
+![](\ref CreatingYourOwnNotification_CreateTemplatedControl.png)
+
+Upon creating a templated control, a new file of code named after your control and a snippet of markup representing a basic template for it (in the `Themes / Generic.xaml` file) will be added to your project. 
+
+<b>Step 2: Add the XAML markup for your notification.</b>
+
+Local notifications should appropriately be interactive visual (or audiovisual) cues that normally appear from either the top or the bottom of the screen, that transition into and out of the viewport.
+
+<ul>
+	<li>To position your notification at the top or the bottom of the screen, set the `VerticalAlignment` property of the element at the root of the notification to either `Top` or `Bottom` respectively.</li>
+	<li>Notifications can be given seperate layouts for mobile and desktop environments using <a href="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.visualstate" target="_blank">Visual States</a>. The use of the breakpoints recommended by Microsoft <a href="https://docs.microsoft.com/en-us/windows/uwp/layout/screen-sizes-and-breakpoints-for-responsive-design" target="_blank">here</a> is encouraged.</li>
+</ul>
+
+<b>Step 3: Derive your notification from the [LocalNotificationPresenter](\ref RavinduL.LocalNotifications.LocalNotificationPresenter) class.</b>
+
+The LocalNotificationPresenter is the base-class for all notification presenters. It is an abstract class that defines additional functionality that local notifications are required to implement.
+
+Deriving your control from the LocalNotificationPresenter class would involve adding a reference to the `RavinduL.LocalNotifications` namespace and including the abstract member methods of the base-class. The constructor of your notification should be overloaded to accept a `TimeSpan` parameter which will define the duration of time for which your notification persists on screen. 
+
+<pre><code class="cs">public sealed class CustomNotificationPresenter : LocalNotificationPresenter
+{
+	public CustomNotificationPresenter(TimeSpan duration) : base(duration)
+	{
+		DefaultStyleKey = typeof(CustomNotificationPresenter);
+	}
+&nbsp;
+	protected override void OnHiding()
+	{
+	}
+&nbsp;
+	protected override void OnRestoring()
+	{
+	}
+&nbsp;
+	protected override void OnShowing()
+	{
+	}
+&nbsp;
+	protected override void OnApplyTemplate()
+	{
+	}
+}</code></pre>
+
+<b>Step 4: Implement the required logic.</b>
+
+A presenter has five [State](\ref RavinduL.LocalNotifications.LocalNotificationPresenter.State)s (represented by the [LocalNotificationState](\ref RavinduL.LocalNotifications.LocalNotificationState) enumeration),
+
+1. Hidden (when the presenter is out of view).
+2. Hiding (when the presenter is being hidden).
+3. Showing (when the presenter is being shown from being hidden).
+4. Shown (when the presenter is displayed to the user and is interactive).
+5. Restoring (when the presenter is being restored to the shown state).
+
+<ul>
+	<li>The [OnHiding](ref RavinduL.LocalNotifications.LocalNotificationPresenter.OnHiding), [OnRestoring](ref RavinduL.LocalNotifications.LocalNotificationPresenter.OnRestoring), and [OnShowing](ref RavinduL.LocalNotifications.LocalNotificationPresenter.OnShowing) overrides are automatically invoked when the [Hide](ref RavinduL.LocalNotifications.LocalNotificationPresenter.Hide), [Restore](ref RavinduL.LocalNotifications.LocalNotificationPresenter.Restore) and [Show](ref RavinduL.LocalNotifications.LocalNotificationPresenter.Show) events are invoked, and are to be populated with the code that initiates the respective processes (e.g. starting <a href="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.animation.storyboard" target="_blank">Storyboard</a>s), at the end of which the state needs to be updated to `Hidden`, `Shown` and `Shown` respectively.</li>
+
+	<li>The <a href="https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.FrameworkElement#Windows_UI_Xaml_FrameworkElement_OnApplyTemplate" target="_blank">OnApplyTemplate</a> override can be used, as in any templated control, to execute logic just before the notification is rendered.</li>
+
+	<li>The [OnLoaded](ref RavinduL.LocalNotifications.LocalNotificationPresenter.OnLoaded) override is invoked when the control loads (i.e all XAML elements have been initialized and rendered).</li>
+
+	<li>The [ExecuteAfterLoading](ref RavinduL.LocalNotifications.LocalNotificationPresenter.ExecuteAfterLoading) method can be used to execute logic once after the control has loaded and can therefore be used to execute logic that refers to XAML elements.</li>
+
+	<li>The [OnStateChanged](ref RavinduL.LocalNotifications.LocalNotificationPresenter.OnStateChanged) override is invoked whever the state of the notification changes.</li>
+</ul>
+
+<br>
+\section CreatingYourOwnNotification_AnalysisOfSimpleNotificationPresenter Analysis of the SimpleNotificationPresenter
+
+The [SimpleNotificationPresenter](\ref RavinduL.LocalNotifications.Presenters.SimpleNotificationPresenter) is a presenter included by default with the LocalNotifications library, and is pictured on the [home page](index.html). This section will be an analysis of the presenter's code (with most lines redacted for brevity), of <a href="https://github.com/RavinduL/LocalNotifications/commit/f03005d7e6d8dab1bc296af74e48f36e60cda863" target="_blank">this</a> commit (version 2.0.0), within <a href="https://github.com/RavinduL/LocalNotifications/blob/f03005d7e6d8dab1bc296af74e48f36e60cda863/src/RavinduL.LocalNotifications/Themes/Generic.xaml" target="_blank">Generic.xaml</a> and <a href="https://github.com/RavinduL/LocalNotifications/blob/f03005d7e6d8dab1bc296af74e48f36e60cda863/src/RavinduL.LocalNotifications/Presenters/SimpleNotificationPresenter.cs" target="_blank">SimpleNotificationPresenter.cs</a> (click to view the full source).
+
+The basic structure of the presenter is as follows,
+
+<pre><code class="xml">\<Grid x:Name="LayoutRoot">
+	\<Grid x:Name="TitleBarBackgroundGrid" />
+&nbsp;
+	\<Border>
+		\<Grid>
+			\<Grid.ColumnDefinitions />
+&nbsp;
+			\<Grid x:Name="Target">
+				\<FontIcon />
+				\<TextBlock />
+			\</Grid>
+&nbsp;
+			\<Button x:Name="HideButton" />
+		\</Grid>
+	\</Border>
+\</Grid></code></pre>
+
+The Grid `LayoutRoot`, the root element of the notification, has three storyboards and corresponding animations defined. The animations will be used for showing, hiding and restoring the notification.
+
+<pre><code class="xml"><Storyboard x:Name="ShowStoryboard">
+	<DoubleAnimation x:Name="ShowAnimation"/>
+</Storyboard>
+&nbsp;
+<Storyboard x:Name="HideStoryboard">
+	<DoubleAnimation x:Name="HideAnimation"/>
+</Storyboard>
+&nbsp;
+<Storyboard x:Name="RestoreStoryboard">
+	<DoubleAnimation x:Name="RestoreAnimation"/>
+</Storyboard></code></pre>
+
+`LayoutRoot` also uses a XAML `VisualStateManager` that is used to optimize the notification's layout for mobile screens.
+
+The storyboards, animations, and some XAML elements are referenced in code, within the `OnApplyTemplate` override of the templated control, which enables them to be manipulated programmatically.
+
+<pre><code class="cs">LayoutRoot = (Grid)GetTemplateChild(nameof(LayoutRoot));
+Target = (Grid)GetTemplateChild(nameof(Target));
+HideButton = (Button)GetTemplateChild(nameof(HideButton));
+&nbsp;
+ShowStoryboard = (Storyboard)GetTemplateChild(nameof(ShowStoryboard));
+HideStoryboard = (Storyboard)GetTemplateChild(nameof(HideStoryboard));
+RestoreStoryboard = (Storyboard)GetTemplateChild(nameof(RestoreStoryboard));
+&nbsp;
+ShowAnimation = (DoubleAnimation)GetTemplateChild(nameof(ShowAnimation));
+HideAnimation = (DoubleAnimation)GetTemplateChild(nameof(HideAnimation));
+RestoreAnimation = (DoubleAnimation)GetTemplateChild(nameof(RestoreAnimation));</code></pre>
+
+The notification is hidden from view upon loading, and the show, hide, and restore storyboards are started within the `OnShowing`, `OnHiding`, and `OnRestoring` overrides, with the required animation tweaks,
+
+<pre><code class="cs">protected override void OnLoaded(object sender, RoutedEventArgs e)
+{
+	ShowAnimation.From = HideAnimation.To = -LayoutRoot.ActualHeight;
+}
+&nbsp;
+protected override void OnShowing()
+{
+	ExecuteAfterLoading(ShowStoryboard.Begin);
+}
+&nbsp;
+protected override void OnHiding()
+{
+	HideAnimation.From = translation.Y;
+	HideStoryboard.Begin();
+}
+&nbsp;
+protected override void OnRestoring()
+{
+	RestoreAnimation.From = translation.Y;
+	RestoreStoryboard.Begin();
+}</code></pre>
+
+The show, hide, and restore storyboards are assigned completion event handlers that change the state of the notification,
+
+<pre><code class="cs">ShowStoryboard.Completed += (sender, e) => State = LocalNotificationState.Shown;
+HideStoryboard.Completed += (sender, e) => State = LocalNotificationState.Hidden;
+RestoreStoryboard.Completed += (sender, e) => State = LocalNotificationState.Shown;</code></pre>
+
+Manipulation is enabled on the `LayoutRoot` grid, and handled programmatically,
+
+<pre><code class="cs">LayoutRoot.ManipulationDelta += LayoutRoot_ManipulationDelta;
+LayoutRoot.ManipulationCompleted += LayoutRoot_ManipulationCompleted;</code></pre>
+
+<pre><code class="cs">private void LayoutRoot_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+{
+	if (e.Cumulative.Translation.Y < -40)
+	{
+		Hide();
+	}
+	else
+	{
+		Restore();
+	}
+}
+&nbsp;
+private void LayoutRoot_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+{
+	translation.Y += e.Delta.Translation.Y;
+&nbsp;
+	if (translation.Y > 20)
+	{
+		translation.Y = 20;
+	}
+}</code></pre>
+
+The `OnStateChanged` override is used to temporarily disable manipulation during animation,
+
+<pre><code class="cs">protected override void OnStateChanged(LocalNotificationState newState, LocalNotificationState previousState)
+{
+	if (LayoutRoot != null)
+	{
+		LayoutRoot.ManipulationMode = (newState == LocalNotificationState.Shown ? ManipulationModes.TranslateY : ManipulationModes.None);
+	}
+}</code></pre>
+
+Dependency properties are used for the customizable properties of the notification and are bound in XAML using `TemplateBinding`,
+
+<pre><code class="cs">public string Glyph
+{
+	get { return (string)GetValue(GlyphProperty); }
+	set { SetValue(GlyphProperty, value); }
+}
+&nbsp;
+public static readonly DependencyProperty GlyphProperty =
+	DependencyProperty.Register(nameof(Glyph), typeof(string), typeof(SimpleNotificationPresenter), new PropertyMetadata(""));
+&nbsp;
+public string Text
+{
+	get { return (string)GetValue(TextProperty); }
+	set { SetValue(TextProperty, value); }
+}
+&nbsp;
+public static readonly DependencyProperty TextProperty =
+	DependencyProperty.Register(nameof(Text), typeof(string), typeof(SimpleNotificationPresenter), new PropertyMetadata(""));
+&nbsp;
+public Action Action { get; set; }</code></pre>
+
+<br>
+*/

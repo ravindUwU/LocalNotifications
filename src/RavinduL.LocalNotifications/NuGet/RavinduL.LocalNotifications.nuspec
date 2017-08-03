@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>RavinduL.LocalNotifications</id>
+		<version>2.0.0</version>
+		<title>LocalNotifications</title>
+		<authors>Ravindu Liyanapathirana</authors>
+		<owners>RavinduL</owners>
+		<licenseUrl>https://github.com/RavinduL/LocalNotifications/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://ravindul.github.io/LocalNotifications/</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Local (in-app) notifications for UWP applications.</description>
+		<releaseNotes>
+			2.0.0
+			- First package for v2.
+		</releaseNotes>
+		<copyright>Copyright 2017</copyright>
+		<tags>uwp local notification in-app</tags>
+	</metadata>
+	<files>
+		<file src="bin\Release\**" target="ref\uap10.0"/>
+		<file src="bin\ARM\Release\**" target="runtimes\win10-arm\lib\uap10.0"/>
+		<file src="bin\x86\Release\**" target="runtimes\win10-x86\lib\uap10.0"/>
+		<file src="bin\x64\Release\**" target="runtimes\win10-x64\lib\uap10.0"/>
+	</files>
+</package>

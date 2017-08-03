@@ -1,0 +1,228 @@
+@import "colors";
+
+$font_sans_serif: "Segoe UI", sans-serif;
+$font_monospaced: "Consolas", monospace;
+
+$color_blue: #00f;
+$color_red: #f00;
+$color_light_gray: #efefef;
+
+$body_max_width: 1000px;
+
+* {
+	box-sizing: border-box;
+	text-shadow: none !important;
+
+	:not(pre), 
+	:not(code) {
+		font-family: $font_sans_serif;
+		font-weight: normal;
+	}
+}
+
+strong, b {
+	font-weight: bold;
+}
+
+pre, code {
+	font-family: $font_monospaced;
+}
+
+body{
+	max-width: $body_max_width;
+	margin: 0 auto;
+}
+
+.contents {
+
+	img {
+		max-width: 100%;
+	}
+
+	a{
+		color: $color_belize_hole;
+
+		&:visited {
+			color: $color_belize_hole;
+		}
+
+		&:hover{
+			text-decoration: none;
+			color: $color_wet_asphalt;
+			border-bottom: 1px solid  $color_wet_asphalt;
+		}
+	}
+}
+
+#titlearea {
+	padding: 15px;
+	border: none;
+}
+
+h2.memtitle {
+	background: none;
+	background-color: $color_light_gray;
+	border-color: $color_silver;
+	font-size: 20px;
+	font-weight: normal;
+	border-radius: 0;
+	position: relative;
+
+	.permalink {
+		position: absolute;
+		right: -30px;
+		top: 10px;
+
+		a{
+			color: $color_silver;
+		}
+	}
+
+	&:hover > .permalink {
+		display: inline-block;
+	}
+}
+
+span.mlabel {
+	background: none;
+	border-color: $color_silver;
+	border-radius: 0;
+	color: #000;
+	padding: 5px;
+}
+
+.memitem {
+
+	.memproto {
+		background: none;
+		background-color: $color_light_gray;
+		border-color: $color_silver;
+		box-shadow: none;
+		border-bottom: 1px solid $color_silver;
+		max-width: $body_max_width - 20px; // 20px reduced to compensate for left and right margins by .contents
+		overflow-x: auto;
+
+		* {
+			font-family: $font_monospaced;
+		}
+
+		.paramtype, .paramtype * {
+			color: $color_blue;
+		}
+	}
+
+	.memdoc {
+		background: none;
+		box-shadow: none;
+		border-color: $color_silver;
+
+		.fragment, .fragment * {
+			font-family: $font_monospaced;
+
+			span.keywordtype {
+				color: $color_blue;
+			}
+
+			a {
+				color: $color_blue;
+			}
+		}
+
+		table.fieldtable {
+			border-radius: 0;
+			box-shadow: none;
+
+			th {
+				background: none;
+				background-color: $color_light_gray;
+			}
+		}
+	}
+}
+
+#main-menu {
+	padding: 0;
+
+	& > li > a {
+		min-width: 150px;
+		text-align: center;
+	}
+
+	li {
+
+		a{
+			color: #000;
+
+			&:hover {
+				background: rgba(0, 0, 0, 0.1);
+				color: #000;
+			}
+		}
+
+		ul {
+			padding: 0;
+			border-radius: 0 !important;
+		}
+	}
+}
+
+hr.footer {
+	border-color: $color_silver;
+}
+
+address.footer {
+	width: 50%;
+	margin: 10px 0 20px 0;
+	float: right;
+}
+
+small.footer-credit {
+	display: inline-block;
+	margin-top: 12px;
+	margin-left: 12px;
+}
+
+.toc {
+	background: none;
+	background-color: #fff !important;
+	border-radius: 0 !important;
+}
+
+// TODO: Reduce heading sizes for smaller devices.
+
+@media screen and (max-width: 424px) {
+
+	#projectname {
+		font-size: 200%;
+	}
+
+	#projectbrief {
+		font-size: 110%;
+	}
+}
+
+@media screen and (max-width: 300px) {
+
+	#projectname {
+		font-size: 180%;
+	}
+
+	#projectbrief {
+		font-size: 100%;
+	}
+}
+
+@media screen and (max-width: 360px) {
+
+	small.footer-credit {
+		margin: 12px auto 0;
+		display: block;
+		text-align: center;
+	}
+
+	address.footer {
+		width: auto;
+		float: none;
+		text-align: center;
+	}
+}

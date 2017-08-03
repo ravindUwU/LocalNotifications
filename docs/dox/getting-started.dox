@@ -1,0 +1,108 @@
+/**
+
+\page GettingStarted Getting Started
+
+\tableofcontents
+
+This library enables display and management of local (in-app) notifications. 
+
+Local notifications are managed by your application, and not the operating system, unlike <a href="https://docs.microsoft.com/en-us/windows/uwp/controls-and-patterns/tiles-badges-notifications#notifications" target="_blank">Windows toast notifications</a>. They therefore do not appear in the action center.
+
+<br>
+\section GettingStarted_Installation Installation
+
+The preferred method of installing LocalNotifications is via <a href="https://www.nuget.org/" target="_blank">Nuget</a>. You can either search for and install <a href="https://www.nuget.org/packages/RavinduL.LocalNotifications" target="_blank">the package</a> graphically via the NuGet gallery within Visual Studio, or run the following command in the Package Manager Console,
+
+> `Install-Package %RavinduL.%LocalNotifications`
+
+Alternatively, you could clone or download the <a href="https://github.com/RavinduL/LocalNotifications" target="_blank">GitHub repository</a> and reference the project file located at the path '`src / %RavinduL.LocalNotifications / %RavinduL.LocalNotifications.csproj`' in your Universal Windows project. 
+
+Click [here](\ref GettingStarted_Usage) to jump directly to the usage section.
+
+<br>
+\section GettingStarted_DemonstrativeApplication Demonstrative Application
+
+An application (pictured on the [home page](index.html)) that demonstrates the functionality of the library is included in the GitHub repository, located at the path '`src/&thinsp;%RavinduL.LocalNotifications.Demo/`'. To run this,
+
+1. Open Visual Studio solution file located at the path '`src/&thinsp;%RavinduL.LocalNotifications.sln`'.
+2. Set the 'RavinduL.LocalNotifications.Demo' project as the startup project (an option found within the context menu of associated item within the Solution Explorer).
+3. Ensure that the 'Build' and 'Deploy' options for the app are enabled within the Configuration Manager.
+4. Debug (<kbd>F5</kbd>) or Run (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) the project.
+
+To browse the source code of the demonstrative app, click <a href="https://github.com/RavinduL/LocalNotifications/tree/master/src/RavinduL.LocalNotifications.Demo" target="_blank">here</a>.
+
+<br>
+\section GettingStarted_HowItWorks How it Works
+
+Showing a local notification requires two components,
+
+1. a presenter, and...
+2. a manager.
+
+A presenter is the actual notification that the user sees. It is a templated control containing the definition of what the notification looks and how it behaves (in the form of visual elements, animations, etc...), and the logic for it to be shown, hidden and do whatever else it does. It derives from the [LocalNotificationPresenter](\ref RavinduL.LocalNotifications.LocalNotificationPresenter) class, that is a sub-class of the XAML <a href="https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.Control" target="_blank">Control</a> class. Presenters provided with the library are defined within the [Presenters](\ref RavinduL.LocalNotifications.Presenters) namespace.
+
+A manager (an instance of the [LocalNotificationManager](\ref RavinduL.LocalNotifications.LocalNotificationManager) class) is responsible for adding and removing presenters to and from the XAML visual tree as needed. It 'latches' on to a <a href="https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.Grid" target="_blank">Grid</a> element for this purpose.
+
+<br>
+\section GettingStarted_Usage Usage
+
+<b>Step 1: Create a Grid element to be assigned to the manager.</b>
+
+<pre><code class="xml">\<Grid x:Name="NotificationGrid" /></code></pre>
+
+In order to ensure that the local notifications stay above other elements, define the Grid towards the bottom of the XAML file (thereby positioning it above the elements defined physically above it in the markup, within the common parent element). For example,
+
+<pre><code class="xml">\<Page ...>
+	\<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+&nbsp;
+		\<!-- Elements *overlapped by* NotificationGrid (and thereby, local notifications) go above this comment. -->
+		\<Grid x:Name="NotificationGrid" />
+	\</Grid>
+\</Page>
+</code></pre>
+
+<b>Step 2: Create a manager and assign the newly created Grid to it.</b>
+
+<pre><code class="cs">public sealed partial class MainPage : Page
+{
+	private LocalNotificationManager manager;
+&nbsp;
+	public MainPage()
+	{
+		InitializeComponent();
+	}
+&nbsp;
+	protected override void OnNavigatedTo(NavigationEventArgs e)
+	{
+		manager = new LocalNotificationManager(NotificationGrid);
+	}   
+}
+</code></pre>
+
+In this case, a field has been declared within the Page, and instantiated as the manager when the page is navigated to. 
+
+<b>Step 3: Display a presenter via the manager.</b>
+
+The presenter used for the purpose of this demonstration would be the [SimpleNotificationPresenter](\ref RavinduL.LocalNotifications.Presenters.SimpleNotificationPresenter), and implementation that is provided by default with the library.
+
+Whenever a notification is needed to be shown from the manager (in this case, in the click event handler of a button), the [LocalNotificationManager.Show](\ref RavinduL.LocalNotifications.LocalNotificationManager.Show) method can be invoked. An instance of a presenter is a required parameter of this method.
+
+<pre><code class="cs">private void Button_Click(object sender, RoutedEventArgs e)
+{
+	var presenter = new SimpleNotificationPresenter
+	(
+		TimeSpan.FromSeconds(2),
+		"Notification text",
+		async () => await new MessageDialog("Notification activated.").ShowAsync()
+	)
+	{
+		Background = new SolidColorBrush(Colors.DarkGreen),
+	};
+&nbsp;
+	manager.Show(presenter);
+}</code></pre>
+
+The [LocalNotificationManager.Show](\ref RavinduL.LocalNotifications.LocalNotificationManager.Show) method accepts an optional parameter of the type [LocalNotificationCollisionBehaviour](\ref RavinduL.LocalNotifications.LocalNotificationCollisionBehaviour). This defines how a new notification will behave when there already is one visible. 
+
+<br>
+*/

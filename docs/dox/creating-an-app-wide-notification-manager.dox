@@ -1,0 +1,88 @@
+/**
+
+\page CreatingAnAppWideNotificationManager Creating an App-Wide Notification Manager
+
+This guide will teach you how to create a local notification manager that can be accessed from anywhere within your UWP application, thereby eliminating the need to instantiate a new manager and assign a Grid to it every time a local notification needs to be shown on a new page.
+
+The code being modified is that of a new blank Universal Windows project within Visual Studio, _with comments and irrelevant lines of code redacted for brevity_. 
+
+By default, the App class (that derives from the <a href="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.application" target="_blank">Application</a> class) is the starting point of a UWP application. Among its numerous responsibilities is the creation of the <a href="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.frame" target="_blank">Frame</a> within which the contents of the application are displayed, for which the default implementation within the `OnLaunched` override contained within `App.xaml.cs` is,
+
+<pre><code class="cs">Frame rootFrame = Window.Current.Content as Frame;
+&nbsp;
+if (rootFrame == null)
+{
+	rootFrame = new Frame();
+&nbsp;
+&nbsp;&nbsp;&nbsp;\htmlonly&#47;&#47;\endhtmlonly ...
+&nbsp;
+	Window.Current.Content = rootFrame;
+}</code></pre>
+
+Accordingly a Frame identified as `rootFrame` is created and assigned to the contents of the current window. 
+
+To create an app-wide local notification manager, `rootFrame` has to be placed within a Grid (in this case, identified as `rootGrid`), which will contain yet another Grid (in this case, identified as `notificationGrid`) which will be used for displaying local notifications, creating a layout equivalent to the following XAML markup,
+
+<pre><code class="xml">\<Grid x:Name="rootGrid">
+	\<Frame x:Name="rootFrame" />
+	\<Grid x:Name="notificationGrid" />
+\</Grid></code></pre>
+
+The way this would be achieved programmatically is,
+
+<pre><code class="cs">Frame rootFrame = Window.Current.Content as Frame;
+&nbsp;
+if (rootFrame == null)
+{
+	rootFrame = new Frame();
+&nbsp;
+	var notificationGrid = new Grid();
+	var rootGrid = new Grid();
+&nbsp;
+	rootGrid.Children.Add(rootFrame);
+	rootGrid.Children.Add(notificationGrid);
+&nbsp;
+&nbsp;&nbsp;&nbsp;\htmlonly&#47;&#47;\endhtmlonly ...
+&nbsp;
+	Window.Current.Content = rootGrid;
+}</code></pre>
+
+Note how the order in which `rootFrame` and `notificationGrid` are added to `rootGrid` ensures that the latter overlaps the former. 
+
+Finally an instance of the [LocalNotificationManager](\ref RavinduL.LocalNotifications.LocalNotificationManager) class would have to be created within the `App` class in a way in which it would be accessible throughout your application (via for example, a static property), supplying `notificationGrid` as the constructor parameter, like so,
+
+<pre><code class="cs">sealed partial class App : Application
+{
+	public static LocalNotificationManager LocalNotificationManager;
+&nbsp;
+&nbsp;&nbsp;&nbsp;\htmlonly&#47;&#47;\endhtmlonly ...
+&nbsp;
+	protected override void OnLaunched(LaunchActivatedEventArgs e)
+	{
+		Frame rootFrame = Window.Current.Content as Frame;
+&nbsp;
+		if (rootFrame == null)
+		{
+			rootFrame = new Frame();
+&nbsp;
+			var notificationGrid = new Grid();
+			App.LocalNotificationManager = new LocalNotificationManager(notificationGrid);
+&nbsp;
+			var rootGrid = new Grid();
+&nbsp;
+			rootGrid.Children.Add(rootFrame);
+			rootGrid.Children.Add(notificationGrid);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\htmlonly&#47;&#47;\endhtmlonly ...
+&nbsp;
+			Window.Current.Content = rootGrid;
+		}
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\htmlonly&#47;&#47;\endhtmlonly ...
+	}
+&nbsp;
+&nbsp;&nbsp;&nbsp;\htmlonly&#47;&#47;\endhtmlonly ...
+}</code></pre>
+
+<br>
+*/
