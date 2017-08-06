@@ -1,0 +1,199 @@
+﻿<Page
+	x:Class="RavinduL.LocalNotifications.Demo.MainPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Loaded="Page_Loaded"
+	mc:Ignorable="d">
+
+	<Page.Resources>
+		<GridLength x:Key="LabelColumnLength">160</GridLength>
+		<Style TargetType="TextBox">
+			<Setter Property="BorderThickness" Value="1" />
+		</Style>
+		<Style TargetType="ComboBox">
+			<Setter Property="BorderThickness" Value="1" />
+		</Style>
+		<Style TargetType="Button">
+			<Setter Property="BorderThickness" Value="1" />
+		</Style>
+	</Page.Resources>
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<StackPanel
+			x:Name="Form"
+			Width="640"
+			Padding="24"
+			VerticalAlignment="Center"
+			BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+			BorderThickness="1">
+			<TextBlock
+				Margin="0,0,0,6"
+				FontWeight="SemiBold"
+				Text="RavinduL.LocalNotifications" />
+			<TextBlock TextWrapping="WrapWholeWords">
+				<Run Text="In-app notifications for UWP applications. Get the library at " />
+				<Hyperlink NavigateUri="https://github.com/RavinduL/LocalNotifications">github.com/RavinduL/LocalNotifications</Hyperlink>
+				<Run Text="." />
+			</TextBlock>
+			<Rectangle
+				Height="1"
+				Margin="0,12"
+				Fill="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
+			<Grid Margin="0,0,0,12">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{StaticResource LabelColumnLength}" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock VerticalAlignment="Center" Text="Text:" />
+				<TextBox
+					x:Name="TextTextBox"
+					Grid.Column="1"
+					Text="Notification text" />
+			</Grid>
+			<Grid Margin="0,0,0,12">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{StaticResource LabelColumnLength}" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock VerticalAlignment="Center" Text="Duration (in seconds):" />
+				<TextBox
+					x:Name="DurationTextBox"
+					Grid.Column="1"
+					InputScope="Number"
+					Text="2" />
+			</Grid>
+			<Grid Margin="0,0,0,12">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{StaticResource LabelColumnLength}" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock VerticalAlignment="Center" Text="Position:" />
+				<ComboBox
+					x:Name="PositionComboBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch" />
+			</Grid>
+			<Grid Margin="0,0,0,12">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{StaticResource LabelColumnLength}" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock VerticalAlignment="Center" Text="Glyph:" />
+				<ComboBox
+					x:Name="GlyphComboBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch"
+					SelectionChanged="GlyphComboBox_SelectionChanged" />
+				<!-- Left margin of 12 + 2 to compensate for BorderThickness -->
+				<TextBlock
+					x:Name="GlyphTextBlock"
+					Grid.Column="2"
+					Width="32"
+					Margin="14,0,0,0"
+					VerticalAlignment="Center"
+					FontFamily="Segoe MDL2 Assets"
+					TextAlignment="Center" />
+			</Grid>
+			<Grid Margin="0,0,0,12">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{StaticResource LabelColumnLength}" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock VerticalAlignment="Center" Text="Background color:" />
+				<ComboBox
+					x:Name="BackgroundComboBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch"
+					SelectionChanged="BackgroundComboBox_SelectionChanged" />
+				<Border
+					Grid.Column="2"
+					Margin="12,0,0,0"
+					BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+					BorderThickness="1"
+					CornerRadius="100">
+					<Ellipse
+						x:Name="BackgroundEllipse"
+						Width="{Binding ElementName=BackgroundComboBox, Path=ActualHeight}"
+						Height="{Binding ElementName=BackgroundComboBox, Path=ActualHeight}" />
+				</Border>
+			</Grid>
+			<Grid Margin="0,0,0,12">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{StaticResource LabelColumnLength}" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock VerticalAlignment="Center" Text="Foreground color:" />
+				<ComboBox
+					x:Name="ForegroundComboBox"
+					Grid.Column="1"
+					HorizontalAlignment="Stretch"
+					SelectionChanged="ForegroundComboBox_SelectionChanged" />
+				<Border
+					Grid.Column="2"
+					Margin="12,0,0,0"
+					BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+					BorderThickness="1"
+					CornerRadius="100">
+					<Ellipse
+						x:Name="ForegroundEllipse"
+						Width="{Binding ElementName=ForegroundComboBox, Path=ActualHeight}"
+						Height="{Binding ElementName=ForegroundComboBox, Path=ActualHeight}" />
+				</Border>
+			</Grid>
+			<Grid Margin="0,12,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Button
+					x:Name="HideAllButton"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch"
+					Click="HideAllButton_Click"
+					Content="Hide All" />
+				<Button
+					x:Name="HideCurrentButton"
+					Grid.Column="1"
+					Margin="12,0"
+					HorizontalAlignment="Stretch"
+					Click="HideCurrentButton_Click">
+					<TextBlock
+						Text="Hide current"
+						TextAlignment="Center"
+						TextWrapping="WrapWholeWords" />
+				</Button>
+				<Button
+					x:Name="ShowButton"
+					Grid.Column="2"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch"
+					Click="ShowButton_Click"
+					Content="Show" />
+			</Grid>
+		</StackPanel>
+
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="AdaptiveStates">
+				<VisualState x:Name="Wide">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="641" />
+					</VisualState.StateTriggers>
+				</VisualState>
+				<VisualState x:Name="Narrow">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="0" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="Form.Width" Value="Auto" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+	</Grid>
+</Page>
