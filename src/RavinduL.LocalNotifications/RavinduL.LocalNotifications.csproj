@@ -37,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DocumentationFile>bin\Release\RavinduL.LocalNotifications.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -111,6 +112,9 @@
     <Compile Include="Converters\ComparatorConverter.cs" />
     <Compile Include="Converters\ObjectComparatorConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="LocalNotification.Constants.cs">
+      <DependentUpon>LocalNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocalNotification.cs" />
     <Compile Include="LocalNotificationCollisionBehaviour.cs" />
     <Compile Include="LocalNotificationManager.cs" />

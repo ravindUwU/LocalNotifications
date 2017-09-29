@@ -29,8 +29,9 @@
 		/// Shows the specified <see cref="LocalNotification" />.
 		/// </summary>
 		/// <param name="notification">The <see cref="LocalNotification" /> to be shown.</param>
+		/// <param name="collisionBehaviour">How the notification being shown should behave if an active notification exists.</param>
 		/// <exception cref="ArgumentNullException">notification</exception>
-		public void Show(LocalNotification notification)
+		public void Show(LocalNotification notification, LocalNotificationCollisionBehaviour collisionBehaviour = LocalNotificationCollisionBehaviour.Wait)
 		{
 			if (notification == null)
 				throw new ArgumentNullException(nameof(notification));
@@ -49,7 +50,7 @@
 			{
 				q.Enqueue(notification);
 
-				if (notification.CollisionBehaviour == LocalNotificationCollisionBehaviour.Replace)
+				if (collisionBehaviour == LocalNotificationCollisionBehaviour.Replace)
 				{
 					HideCurrent();
 				}
@@ -121,7 +122,7 @@
 					break;
 			}
 		}
-		
+
 		private void DisengageTimer()
 		{
 			if (timer != null)

@@ -7,17 +7,12 @@
 	/// <summary>
 	/// The base class from which all local notifications derive.
 	/// </summary>
-	/// <seealso cref="Windows.UI.Xaml.Controls.Control" />
+	/// <seealso cref="Control" />
 	[TemplateVisualState(GroupName = GROUP_LOCAL_NOTIFICATION_STATES, Name = STATE_SHOWN)]
 	[TemplateVisualState(GroupName = GROUP_LOCAL_NOTIFICATION_STATES, Name = STATE_HIDDEN)]
 	[TemplateVisualState(GroupName = GROUP_LOCAL_NOTIFICATION_STATES, Name = STATE_RESTORING)]
-	public abstract class LocalNotification : Control
+	public abstract partial class LocalNotification : Control
 	{
-		protected const string STATE_SHOWN = "Shown";
-		protected const string STATE_HIDDEN = "Hidden";
-		protected const string STATE_RESTORING = "Restoring";
-		protected const string GROUP_LOCAL_NOTIFICATION_STATES = "LocalNotificationStates";
-
 		/// <summary>
 		/// Occurs when the notification switches to a <see cref="LocalNotificationState"/>.
 		/// </summary>
@@ -28,11 +23,6 @@
 		/// <para>Set this value to null if you'd prefer the notification to be visible on screen until it's manually dismissed.</para>
 		/// </summary>
 		public TimeSpan? TimeSpan { get; set; }
-
-		/// <summary>
-		/// Gets or sets the behaviour that the notification should follow if an active notification exists when it's shown.
-		/// </summary>
-		public LocalNotificationCollisionBehaviour CollisionBehaviour { get; set; }
 
 		/// <summary>
 		/// Called when the notification is being shown with transitions.
