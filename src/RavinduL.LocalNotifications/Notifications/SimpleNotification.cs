@@ -10,7 +10,7 @@
 	/// <summary>
 	/// A local notification that slides in and out from either the top or the bottom of the screen (dictated by the <see cref="FrameworkElement.VerticalAlignment"/> property), consisting of some text and optionally, a glyph alongside it.
 	/// </summary>
-	/// <seealso cref="RavinduL.LocalNotifications.LocalNotification" />
+	/// <seealso cref="LocalNotification" />
 	[TemplatePart(Name = PART_NOTIFICATION_ROOT, Type = typeof(Grid))]
 	[TemplatePart(Name = PART_TRANSFORM, Type = typeof(TranslateTransform))]
 	[TemplatePart(Name = PART_TARGET, Type = typeof(Grid))]
@@ -24,10 +24,10 @@
 			DefaultStyleKey = typeof(SimpleNotification);
 			RegisterPropertyChangedCallback(VerticalAlignmentProperty, (d, e) => ((SimpleNotification)d).UpdateManipulationPredicates());
 		}
-		
+
 		private Func<Point, double, bool> hasExceededHideThreshold;
 		private Func<Point, double, bool> hasExceededPullAwayLength;
-		
+
 		private double internalHideThreshold;
 		private double internalPullDownLength;
 
@@ -72,16 +72,16 @@
 
 			UpdateManipulationPredicates();
 		}
-		
+
 		private void OnSizeChanged()
-			=> TranslateHeight = (VerticalAlignment == VerticalAlignment.Top)  ? -ActualHeight : ActualHeight;
+			=> TranslateHeight = (VerticalAlignment == VerticalAlignment.Top) ? -ActualHeight : ActualHeight;
 
 		private void OnHideThresholdChanged()
 			=> internalHideThreshold = (VerticalAlignment == VerticalAlignment.Top) ? -HideThreshold : HideThreshold;
 
 		private void OnPullDownLengthChanged()
 			=> internalPullDownLength = (VerticalAlignment == VerticalAlignment.Top) ? PullAwayLength : -PullAwayLength;
-		
+
 		private void UpdateManipulationPredicates()
 		{
 			if (VerticalAlignment != VerticalAlignment.Top && VerticalAlignment != VerticalAlignment.Bottom)

@@ -16,7 +16,7 @@
 			get { return (string)GetValue(TextProperty); }
 			set { SetValue(TextProperty, value); }
 		}
-		
+
 		public static readonly DependencyProperty TextProperty =
 			DependencyProperty.Register(nameof(Text), typeof(string), typeof(SimpleNotification), new PropertyMetadata(null));
 
@@ -31,7 +31,7 @@
 
 		public static readonly DependencyProperty GlyphProperty =
 			DependencyProperty.Register(nameof(Glyph), typeof(string), typeof(SimpleNotification), new PropertyMetadata(null));
-		
+
 		public double TranslateHeight
 		{
 			get { return (double)GetValue(TranslateHeightProperty); }
@@ -78,7 +78,7 @@
 			DependencyProperty.Register(nameof(TransitionDuration), typeof(Duration), typeof(SimpleNotification), new PropertyMetadata(null));
 
 		/// <summary>
-		/// Gets or sets the width of the <see cref="SimpleNotification"/> when its viewport is very wide (during which it ideally shouldn't stretch as it does when the viewport is narrow). 
+		/// Gets or sets the width of the <see cref="SimpleNotification"/> when its viewport is very wide (during which it ideally shouldn't stretch as it does when the viewport is narrow).
 		/// <para>Set this value to <see cref="Double.NaN"/> if you'd prefer the notification to be horizontally stretched regardless of the width of the viewport.</para>
 		/// </summary>
 		public double CompactWidth
@@ -113,7 +113,7 @@
 
 		public static readonly DependencyProperty GlyphFontFamilyProperty =
 			DependencyProperty.Register(nameof(GlyphFontFamily), typeof(FontFamily), typeof(SimpleNotification), new PropertyMetadata(null));
-		
+
 		public Brush PullAwayHeaderBackground
 		{
 			get { return (Brush)GetValue(PullAwayHeaderBackgroundProperty); }

@@ -3,7 +3,7 @@
 	// Sourced from https://docs.microsoft.com/en-us/windows/uwp/style/segoe-ui-symbol-font
 	// The icon list <table> was copied off the webpage and
 	//     \w+(?: |\t)+(\w+)(?: |\t)+(\w+)
-	// was replaced with 
+	// was replaced with
 	//     public const char $2 = '\\u$1';
 	class SegoeMDL2Assets
 	{

@@ -2,7 +2,7 @@
 {
 	using System;
 	using Windows.UI.Xaml.Data;
-	
+
 	public abstract class ComparatorConverter<TFrom, TTo> : IValueConverter
 	{
 		public TFrom KnownValue { get; set; }

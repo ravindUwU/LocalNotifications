@@ -5,7 +5,7 @@
 	/// <summary>
 	/// Contains information about a setting of <see cref="LocalNotification.State"/>.
 	/// </summary>
-	/// <seealso cref="System.EventArgs" />
+	/// <seealso cref="EventArgs" />
 	public sealed class LocalNotificationStateChangedEventArgs : EventArgs
 	{
 		/// <summary>
