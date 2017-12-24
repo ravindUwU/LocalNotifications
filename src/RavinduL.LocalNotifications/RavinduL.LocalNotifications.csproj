@@ -120,11 +120,11 @@
     <Compile Include="LocalNotificationManager.cs" />
     <Compile Include="LocalNotificationState.cs" />
     <Compile Include="LocalNotificationStateChangedEventArgs.cs" />
-    <Compile Include="Notifications\SimpleNotification.Constants.cs">
+    <Compile Include="Notifications\SimpleNotification\SimpleNotification.Constants.cs">
       <DependentUpon>SimpleNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Notifications\SimpleNotification.cs" />
-    <Compile Include="Notifications\SimpleNotification.Properties.cs">
+    <Compile Include="Notifications\SimpleNotification\SimpleNotification.cs" />
+    <Compile Include="Notifications\SimpleNotification\SimpleNotification.Properties.cs">
       <DependentUpon>SimpleNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,7 +136,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Notifications\SimpleNotification.xaml">
+    <Page Include="Notifications\SimpleNotification\SimpleNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
