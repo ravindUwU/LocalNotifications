@@ -78,7 +78,7 @@
 			DependencyProperty.Register(nameof(TransitionDuration), typeof(Duration), typeof(SimpleNotification), new PropertyMetadata(null));
 
 		/// <summary>
-		/// Gets or sets the width of the <see cref="SimpleNotification"/> when its viewport is very wide (during which it ideally shouldn't stretch as it does when the viewport is narrow).
+		/// Gets or sets how wide the <see cref="SimpleNotification"/> shoud be when the viewport is wide (when it ideally shouldn't stretch horizontally).
 		/// <para>Set this value to <see cref="Double.NaN"/> if you'd prefer the notification to be horizontally stretched regardless of the width of the viewport.</para>
 		/// </summary>
 		public double CompactWidth
@@ -91,7 +91,7 @@
 			DependencyProperty.Register(nameof(CompactWidth), typeof(double), typeof(SimpleNotification), new PropertyMetadata(null));
 
 		/// <summary>
-		/// Gets or sets the breakpoint that, if exceeded, the <see cref="SimpleNotification"/> attains the fixed width defined by <see cref="CompactWidth"/> instead of stretching horizontally.
+		/// Gets or sets the width that, if exceeded, the <see cref="SimpleNotification"/> attains the fixed width defined by <see cref="CompactWidth"/> instead of stretching horizontally.
 		/// </summary>
 		public double Breakpoint
 		{

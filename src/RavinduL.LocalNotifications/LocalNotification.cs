@@ -20,7 +20,7 @@
 
 		/// <summary>
 		/// Gets or sets the time span that the notification stays shown on screen.
-		/// <para>Set this value to null if you'd prefer the notification to be visible on screen until it's manually dismissed.</para>
+		/// <para>Set this value to null if notification should be visible on screen until it's manually dismissed.</para>
 		/// </summary>
 		public TimeSpan? TimeSpan { get; set; }
 

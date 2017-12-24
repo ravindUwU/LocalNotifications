@@ -34,7 +34,9 @@
 		public void Show(LocalNotification notification, LocalNotificationCollisionBehaviour collisionBehaviour = LocalNotificationCollisionBehaviour.Wait)
 		{
 			if (notification == null)
+			{
 				throw new ArgumentNullException(nameof(notification));
+			}
 
 			if (current == null)
 			{
@@ -83,7 +85,7 @@
 		{
 			switch (e.NewState)
 			{
-				// When a notification first gets hidden, it will expire (i.e. get removed from the visual tree).
+				// When a notification first gets hidden, it will get removed from the visual tree.
 				case LocalNotificationState.Hidden:
 					{
 						current.StateChanged -= Current_StateChanged;
@@ -101,7 +103,7 @@
 					}
 					break;
 
-				// When a notification gets shown when the timer is null (implying that it is shown for the first time), a new timer will be assigned to schedule hiding it.
+				// When a notification gets shown when the timer is null (i.e. when it's first shown), a new timer will be assigned to schedule hiding it.
 				// The null check is so that when the notification switches to the 'Shown' state multiple times (e.g. after restoration), a new timer doesn't get assigned to it.
 				case LocalNotificationState.Shown:
 					{

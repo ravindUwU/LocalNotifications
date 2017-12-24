@@ -8,7 +8,7 @@
 	using Windows.UI.Xaml.Media;
 
 	/// <summary>
-	/// A local notification that slides in and out from either the top or the bottom of the screen (dictated by the <see cref="FrameworkElement.VerticalAlignment"/> property), consisting of some text and optionally, a glyph alongside it.
+	/// A <see cref="LocalNotification"/> that slides in and out from either the top or the bottom of the screen, consisting of some text and optionally, a glyph alongside it.
 	/// </summary>
 	/// <seealso cref="LocalNotification" />
 	[TemplatePart(Name = PART_NOTIFICATION_ROOT, Type = typeof(Grid))]
@@ -109,7 +109,7 @@
 		{
 			base.OnStateChanged(e);
 
-			// Ensures that the notification can be manipulated only *after* it's shown.
+			// Ensures that the notification can be manipulated only _after_ it's shown.
 			notificationRoot.ManipulationMode = e.NewState == LocalNotificationState.Shown ? ManipulationModes.TranslateY : ManipulationModes.None;
 		}
 

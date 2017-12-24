@@ -5,7 +5,7 @@
 	using Windows.UI.Xaml.Data;
 
 	/// <summary>
-	/// Converts a string to <see cref="Visibility.Visible"/> if it isn't null and doesn't contain whitespace, or returns <see cref="Visibility.Collapsed"/>.
+	/// Converts a <see cref="String"/> to a <see cref="Visibility"/> by checking if it is null, empty, or consists of only white-space characters.
 	/// </summary>
 	/// <seealso cref="IValueConverter" />
 	public sealed class StringToVisibilityConverter : IValueConverter
