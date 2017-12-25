@@ -22,5 +22,7 @@
 		-->
 		<Assembly Name="*Application*" Dynamic="Required All" />
 		<!-- Add your application specific runtime directives here. -->
+	
+		<Type Name="Windows.UI.Colors" Dynamic="Required Public" />
 	</Application>
 </Directives>

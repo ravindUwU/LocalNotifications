@@ -21,28 +21,18 @@
 		{
 			InitializeComponent();
 
-			var _colors = typeof(Colors)
+			colors = typeof(Colors)
 				.GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
 				.Where((p) => p.PropertyType == typeof(Color))
-				.Select((p) => new Tuple<string, SolidColorBrush>(p.Name, new SolidColorBrush((Color)p.GetValue(p))));
+				.ToDictionary((p) => p.Name, (p) => new SolidColorBrush((Color)p.GetValue(null)));
 
-			foreach (var item in _colors)
-			{
-				colors.Add(item.Item1, item.Item2);
-			}
-
-			var _glyphs = typeof(SegoeMDL2Assets)
+			glyphs = typeof(SegoeMDL2Assets)
 				.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
 				.Where((f) => f.FieldType == typeof(char))
 				.OrderBy((f) => f.Name)
-				.Select((f) => new Tuple<string, char>(f.Name, (char)f.GetValue(f)));
+				.ToDictionary((f) => f.Name, (f) => (char)f.GetValue(null));
 
 			glyphs.Add("None", '\0');
-
-			foreach (var item in _glyphs)
-			{
-				glyphs.Add(item.Item1, item.Item2);
-			}
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
