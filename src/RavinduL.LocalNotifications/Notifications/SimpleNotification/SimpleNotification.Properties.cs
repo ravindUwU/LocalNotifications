@@ -113,14 +113,5 @@
 
 		public static readonly DependencyProperty GlyphFontFamilyProperty =
 			DependencyProperty.Register(nameof(GlyphFontFamily), typeof(FontFamily), typeof(SimpleNotification), new PropertyMetadata(null));
-
-		public Brush PullAwayHeaderBackground
-		{
-			get { return (Brush)GetValue(PullAwayHeaderBackgroundProperty); }
-			set { SetValue(PullAwayHeaderBackgroundProperty, value); }
-		}
-
-		public static readonly DependencyProperty PullAwayHeaderBackgroundProperty =
-			DependencyProperty.Register(nameof(PullAwayHeaderBackground), typeof(Brush), typeof(SimpleNotification), new PropertyMetadata(null));
 	}
 }

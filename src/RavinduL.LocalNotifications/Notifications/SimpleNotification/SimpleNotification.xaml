@@ -16,7 +16,6 @@
 		<Setter Property="Breakpoint" Value="641" />
 		<Setter Property="GlyphFontFamily" Value="Segoe MDL2 Assets" />
 		<Setter Property="Padding" Value="12" />
-		<Setter Property="PullAwayHeaderBackground" Value="DarkGreen" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="notifications:SimpleNotification">
@@ -77,7 +76,7 @@
 							Grid.ColumnSpan="2"
 							Height="{TemplateBinding PullAwayLength}"
 							VerticalAlignment="{TemplateBinding VerticalAlignment}"
-							Background="{TemplateBinding PullAwayHeaderBackground}"
+							Background="{TemplateBinding Background}"
 							RenderTransformOrigin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalAlignment, Converter={StaticResource VerticalAlignmentToRenderTransformOriginConverter}}"
 							Visibility="Collapsed">
 							<Grid.RenderTransform>
