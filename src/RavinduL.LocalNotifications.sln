@@ -10,8 +10,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{E5228815-94F4-4AFF-90FE-25A31ECFB936}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
+		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{DF7835A1-3927-4538-82B0-615D5062F4B9}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\pack.ps1 = NuGet\pack.ps1
+		NuGet\RavinduL.LocalNotifications.nuspec = NuGet\RavinduL.LocalNotifications.nuspec
 	EndProjectSection
 EndProject
 Global

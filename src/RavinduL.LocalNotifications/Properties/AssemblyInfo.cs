@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("RavinduL.LocalNotifications")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Create and manage in-app notifications in Universal Windows applications.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("RavinduL.LocalNotifications")]

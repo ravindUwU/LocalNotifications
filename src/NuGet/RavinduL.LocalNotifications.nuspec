@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>RavinduL.LocalNotifications</id>
+		<version>3.0.0</version>
+		<description>Create and manage in-app notifications in Universal Windows applications.</description>
+		<authors>RavinduL</authors>
+		<owners>RavinduL</owners>
+		<licenseUrl>https://github.com/RavinduL/LocalNotifications/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/RavinduL/LocalNotifications</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/RavinduL/LocalNotifications/master/images/logo.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright (c) 2017 Ravindu Liyanapathirana</copyright>
+		<tags>local notification in-app uwp</tags>
+	</metadata>
+	<files>
+		<file src="..\RavinduL.LocalNotifications\bin\Release\**" target="lib/uap" />
+	</files>
+</package>
