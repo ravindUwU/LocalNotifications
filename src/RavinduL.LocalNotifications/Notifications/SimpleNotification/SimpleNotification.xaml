@@ -83,7 +83,7 @@
 								<CompositeTransform Rotation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalAlignment, Converter={StaticResource VerticalAlignmentToRotationConverter}}" ScaleY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalAlignment, Converter={StaticResource VerticalAlignmentToScaleYConverter}}" />
 							</Grid.RenderTransform>
 						</Grid>
-						<Grid x:Name="Target">
+						<Grid x:Name="Target" Padding="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
