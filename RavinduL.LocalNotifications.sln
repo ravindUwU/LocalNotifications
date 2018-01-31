@@ -3,22 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavinduL.LocalNotifications", "RavinduL.LocalNotifications\RavinduL.LocalNotifications.csproj", "{6474E959-68EE-403A-B1C9-50F7A37D8420}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavinduL.LocalNotifications", "src\RavinduL.LocalNotifications\RavinduL.LocalNotifications.csproj", "{6474E959-68EE-403A-B1C9-50F7A37D8420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavinduL.LocalNotifications.Demo", "RavinduL.LocalNotifications.Demo\RavinduL.LocalNotifications.Demo.csproj", "{1E20B757-FA5B-4EAD-8BEF-EA374E06CD73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavinduL.LocalNotifications.Demo", "src\RavinduL.LocalNotifications.Demo\RavinduL.LocalNotifications.Demo.csproj", "{1E20B757-FA5B-4EAD-8BEF-EA374E06CD73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{E5228815-94F4-4AFF-90FE-25A31ECFB936}"
 	ProjectSection(SolutionItems) = preProject
-		..\.gitignore = ..\.gitignore
-		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
-		..\LICENSE = ..\LICENSE
-		..\README.md = ..\README.md
+		.gitignore = .gitignore
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{DF7835A1-3927-4538-82B0-615D5062F4B9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{D1D4DCB4-9E4B-4024-AF71-6979779661B0}"
 	ProjectSection(SolutionItems) = preProject
-		NuGet\pack.ps1 = NuGet\pack.ps1
-		NuGet\RavinduL.LocalNotifications.nuspec = NuGet\RavinduL.LocalNotifications.nuspec
+		src\NuGet\pack.ps1 = src\NuGet\pack.ps1
+		src\NuGet\RavinduL.LocalNotifications.nuspec = src\NuGet\RavinduL.LocalNotifications.nuspec
 	EndProjectSection
 EndProject
 Global
